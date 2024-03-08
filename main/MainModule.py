@@ -3,10 +3,9 @@ from dao.ProductDAO import ProductDAO
 from dao.CartDAO import CartDAO
 from dao.OrderDAO import OrderDAO
 from exception.CustomerNotFoundException import CustomerNotFoundException
-from exception.ProductNotFoundException import ProductNotFoundException
 
 def main():
-    print("Welcome to Ecommerce Application!!!")
+    print("\nWelcome to Ecommerce Application!!!")
 
     try:
         while True:
@@ -33,7 +32,7 @@ def main():
                 description = input("Enter the Product Description: ")
                 stockQuantity = int(input("Enter the Stock Quantity of the Product: "))
 
-                data = (name,price,description,stockQuantity)
+                data = (name, price, description, stockQuantity)
                 p = ProductDAO()
                 product_id = p.createProduct(data)
 
@@ -58,6 +57,7 @@ def main():
                     if products is None:
                         print("Sorry!No Products Available")
                     else:
+
                         headers = ["Product Id", "Name", "Price", "Description", "Product Quantity", ]
 
                         header_row = "|".join(f"{header:<27}" for header in headers)
@@ -69,11 +69,16 @@ def main():
                             data_row = "|".join(f"{str(item):<27}" for item in row)
                             print(data_row)
 
-                        productId = int(input("\nEnter the Product Id: "))
-                        quantity = int(input("Enter the Quantity you want: "))
-
                         c = CartDAO()
-                        c.addToCart(customerId,productId,quantity)
+                        while True:
+                            productId = int(input("\nEnter the Product Id: "))
+                            quantity = int(input("Enter the Quantity you want: "))
+
+                            c.addToCart(customerId, productId, quantity)
+
+                            cart_choice = input("\nDo you want to add another product ? Yes/No: ")
+                            if cart_choice.lower() != "yes":
+                                break
                 else:
                     raise CustomerNotFoundException(customerId)
 
@@ -115,7 +120,7 @@ def main():
                         state = input("Enter your state Name: ")
                         pincode = input("Enter the pincode: ")
 
-                        data = (customerId,street,city,state,pincode)
+                        data = (customerId, street, city, state, pincode)
                         o = OrderDAO()
                         order = o.placeOrder(data)
 

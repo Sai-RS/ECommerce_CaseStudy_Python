@@ -37,6 +37,7 @@ class CustomerDAO(DBConnection):
 
             connection.commit()
             connection.close()
+
             return rows
 
         except Exception as e:
