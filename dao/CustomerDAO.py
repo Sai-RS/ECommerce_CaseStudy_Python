@@ -5,7 +5,7 @@ class CustomerDAO(DBConnection):
         try:
             connection = self.getConnection()
 
-            name = input("Enter your Customer Name: ")
+            name = input("Enter your Name: ")
             email = input("Enter your Email: ")
             password = input("Enter your Password: ")
 
