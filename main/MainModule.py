@@ -107,21 +107,26 @@ def main():
                 flag = CustomerDAO().checkCustomerId(customerId)
 
                 if flag is not None:
-                    street = input("Enter your Street Name: ")
-                    city = input("Enter your City Name: ")
-                    state = input("Enter your state Name: ")
-                    pincode = input("Enter the pincode: ")
+                    cartItems = CartDAO().getAllFromCart(customerId)
 
-                    data = (customerId,street,city,state,pincode)
-                    o = OrderDAO()
-                    order = o.placeOrder(data)
+                    if len(cartItems) != 0:
+                        street = input("Enter your Street Name: ")
+                        city = input("Enter your City Name: ")
+                        state = input("Enter your state Name: ")
+                        pincode = input("Enter the pincode: ")
 
-                    if order[0] != -1:
-                        print("\nOrder created Successfully!!!\n")
-                        print(f"Your Order Id: {order[0]}")
-                        print(f"Total Price: {order[1]}")
+                        data = (customerId,street,city,state,pincode)
+                        o = OrderDAO()
+                        order = o.placeOrder(data)
+
+                        if order[0] != -1:
+                            print("\nOrder created Successfully!!!\n")
+                            print(f"Your Order Id: {order[0]}")
+                            print(f"Total Price: {order[1]}")
+                        else:
+                            print("\nSorry! Could not place your order! Please Try Again!")
                     else:
-                        print("\nSorry! Could not place your order! Please Try Again!")
+                        print("\nAdd products to your cart to place an Order!!!!")
                 else:
                     raise CustomerNotFoundException(customerId)
 

@@ -13,7 +13,7 @@ class Order_Item:
 
     def setProductId(self,product_id):
         self.product_id = product_id
-        
+
     def setQuantity(self,quantity):
         selg.quantity = quantity
 
