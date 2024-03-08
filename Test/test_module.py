@@ -4,10 +4,10 @@ from dao.ProductDAO import ProductDAO
 from dao.CartDAO import CartDAO
 from dao.OrderDAO import OrderDAO
 
-# def test_product_not_found_exception():
-#    with pytest.raises(ProductNotFoundException) as info:
-#        ProductDAO().checkProductId(9)
-#    assert str(info.value) == 'No products available with this product id'
+def test_product_not_found_exception():
+    with pytest.raises(ProductNotFoundException) as info:
+        ProductDAO().checkProductId(9)
+    assert str(info.value) == 'No products available with this product id'
 
 def test_create_product():
     data = ("Eraser", 5, "Smooth", 20)

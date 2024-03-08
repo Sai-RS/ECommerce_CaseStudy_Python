@@ -1,3 +1,5 @@
+import mysql
+
 from util.DBConnUtil import DBConnection
 from exception.ProductNotFoundException import ProductNotFoundException
 
@@ -93,8 +95,8 @@ class ProductDAO(DBConnection):
             if len(rows) == 0:
                 raise ProductNotFoundException(productId)
 
-        except ProductNotFoundException as e:
-            print(e)
+        #except ProductNotFoundException as e:
+        #    print(e)
 
-        except Exception as e:
+        except mysql.connector.Error as e:
             print("In Product DAO - Check Product Id", str(e))
